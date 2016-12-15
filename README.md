@@ -89,13 +89,21 @@ We use [PugJS](https://pugjs.org/api/getting-started.html) as a templating engin
 
 ## Development
 
-While in development mode, run:
+The first time you start a project, you will need to create your `builds` folder in order for Browser-sync to successfully serve your project's files.
+
+Run
+
+```
+gulp init
+```
+
+then
 
 ```
 gulp dev
 ```
 
-This will start a [Browser-sync](https://browsersync.io/) server and will reload on all Sass and Pug file changes.
+`gulp init` creates your `builds` directory and `gulp dev` will start a [Browser-sync](https://browsersync.io/) server and will reload on all Sass and Pug file changes.
 
 
 

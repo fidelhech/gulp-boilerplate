@@ -26,7 +26,7 @@ gulp.task('browser-sync', function() {
 gulp.task('watch', function(){
   gulp.watch('src/templates/**/*.pug', ['pug']);
   gulp.watch('src/sass/**/*.sass', ['sass']);
-  gulp.watch('src/js/modules/**', ['js']);
+  gulp.watch('src/js/modules/**/*.js', ['js']);
 });
 
 /* Convert pug to html */
@@ -34,7 +34,7 @@ gulp.task('pug', function(){
   return gulp.src('src/templates/**/*.pug')
       .pipe(pug())
       .pipe(gulp.dest('builds/dev'))
-      .pipe(browserSync.reload({stream: true, notify: false}));
+      .pipe(browserSync.reload({stream: true}));
 });
 
 /* Convert sass to css */
@@ -47,21 +47,22 @@ gulp.task('sass', function(){
       .pipe(prefix('last 2 versions'))
       .pipe(sourcemaps.write('maps'))
       .pipe(gulp.dest('builds/dev/css'))
-      .pipe(browserSync.reload({stream: true, notify: false}));
+      .pipe(browserSync.reload({stream: true}));
 });
 
 /* Concat and minify JS files */
 gulp.task('js', function(callback) {
-    pump([
-      sourcemaps.init(),
-      gulp.src('src/js/modules/**/*.js'),
-      concat('main.js'),
-      uglify(),
-      sourcemaps.write('maps'),
-      gulp.dest('builds/dev/js'),
-      browserSync.reload({stream: true, notify: false})
-    ], callback);
+  pump([
+    gulp.src('src/js/modules/**/*.js'),
+    sourcemaps.init(),
+    concat('main.js'),
+    sourcemaps.write('maps'),
+    gulp.dest('builds/dev/js'),
+    browserSync.reload({stream: true})
+  ], callback)
 });
 
+gulp.task('init', ['pug', 'sass', 'js']);
+
 /* Default development Task */
-gulp.task('dev', ['pug', 'sass', 'js', 'browser-sync', 'watch']);
+gulp.task('dev', ['browser-sync', 'watch']);
