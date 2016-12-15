@@ -1,7 +1,9 @@
 // Gulp Plugins
-var gulp = require('gulp'),
-    pug = require('gulp-pug'),
-    browserSync = require('browser-sync').create();
+var gulp        = require('gulp'),
+    pug         = require('gulp-pug'),
+    browserSync = require('browser-sync').create(),
+    sass        = require('gulp-sass'),
+    sourcemaps  = require('gulp-sourcemaps');
 
 /**
  * Development Tasks
@@ -19,6 +21,7 @@ gulp.task('browser-sync', function() {
 /* Watch for file changes */
 gulp.task('watch', function(){
   gulp.watch('src/templates/**/*.pug', ['pug']);
+  gulp.watch('src/sass/**/*.sass', ['sass']);
 });
 
 /* Convert pug to html */
@@ -29,8 +32,17 @@ gulp.task('pug', function(){
       .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('sass', function(){
+  return gulp.src('src/sass/main.sass')
+      .pipe(sourcemaps.init())
+      .pipe(sass())
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('builds/dev/css'))
+      .pipe(browserSync.reload({stream: true}));
+});
+
 /* Default development Task */
-gulp.task('dev', ['browser-sync', 'watch']);
+gulp.task('dev', ['sass', 'browser-sync', 'watch']);
 
 
 
