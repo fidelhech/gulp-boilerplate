@@ -30,9 +30,10 @@ gulp.task('pug', function(){
   return gulp.src('src/templates/**/*.pug')
       .pipe(pug())
       .pipe(gulp.dest('builds/dev'))
-      .pipe(browserSync.reload({stream: true}));
+      .pipe(browserSync.reload({stream: true, notify: false}));
 });
 
+/* Convert sass to css */
 gulp.task('sass', function(){
   return gulp.src('src/sass/main.sass')
       .pipe(sourcemaps.init())
@@ -42,7 +43,7 @@ gulp.task('sass', function(){
       .pipe(prefix('last 2 versions'))
       .pipe(sourcemaps.write('maps'))
       .pipe(gulp.dest('builds/dev/css'))
-      .pipe(browserSync.reload({stream: true}));
+      .pipe(browserSync.reload({stream: true, notify: false}));
 });
 
 /* Default development Task */
