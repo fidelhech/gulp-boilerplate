@@ -44,6 +44,6 @@ This will start a [Browser-sync]() server and will reload the browser on all Sas
 
 #### Contributors
 
-Fidel Hech
+Fidel Hechavarria
 
-Jake Wies
+Jake Wiesler
