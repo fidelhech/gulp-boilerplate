@@ -4,7 +4,10 @@ var gulp          = require('gulp'),
     browserSync   = require('browser-sync').create(),
     sass          = require('gulp-sass'),
     sourcemaps    = require('gulp-sourcemaps'),
-    prefix        = require('gulp-autoprefixer');
+    prefix        = require('gulp-autoprefixer'),
+    concat        = require('gulp-concat'),
+    uglify        = require('gulp-uglify'),
+    pump          = require('pump');
 
 /**
  * Development Tasks
@@ -23,6 +26,7 @@ gulp.task('browser-sync', function() {
 gulp.task('watch', function(){
   gulp.watch('src/templates/**/*.pug', ['pug']);
   gulp.watch('src/sass/**/*.sass', ['sass']);
+  gulp.watch('src/js/modules/**', ['js']);
 });
 
 /* Convert pug to html */
@@ -46,5 +50,18 @@ gulp.task('sass', function(){
       .pipe(browserSync.reload({stream: true, notify: false}));
 });
 
+/* Concat and minify JS files */
+gulp.task('js', function(callback) {
+    pump([
+      sourcemaps.init(),
+      gulp.src('src/js/modules/**/*.js'),
+      concat('main.js'),
+      uglify(),
+      sourcemaps.write('maps'),
+      gulp.dest('builds/dev/js'),
+      browserSync.reload({stream: true, notify: false})
+    ], callback);
+});
+
 /* Default development Task */
-gulp.task('dev', ['pug', 'sass', 'browser-sync', 'watch']);
+gulp.task('dev', ['pug', 'sass', 'js', 'browser-sync', 'watch']);
