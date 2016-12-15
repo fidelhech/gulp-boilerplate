@@ -47,9 +47,3 @@ gulp.task('sass', function(){
 
 /* Default development Task */
 gulp.task('dev', ['pug', 'sass', 'browser-sync', 'watch']);
-
-
-
-/**
- * Production Tasks
-**/
