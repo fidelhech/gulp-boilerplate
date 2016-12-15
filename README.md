@@ -13,7 +13,7 @@ A simple boilerplate with support for:
 ## Installation
 
 #### Node
-Make you Node and `npm` are installed on your machine. Install it via their [homepage](https://nodejs.org/en/) or `homebrew` on OSX with:
+Make sure Node and `npm` are installed on your machine. Install it via the [Node homepage](https://nodejs.org/en/) or using `homebrew` on OSX:
 
 ```
 brew install node
@@ -64,7 +64,7 @@ All code is written in the `src` folder and then piped into `builds/dev` or `bui
 
 ## Development
 
-To work in development mode, run:
+While in development mode, run:
 
 ```
 gulp dev
