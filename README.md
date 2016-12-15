@@ -15,14 +15,16 @@ This is a simple boilerplate with support for:
 
 You can install Node via their [homepage](https://nodejs.org/en/) or via `homebrew` with:
 
-`brew install node`
+```
+brew install node
+```
 
 
 #### Clone the repository
 
-
-`git clone https://github.com/fidelhech/gulp-boilerplate.git`
-
+```
+git clone https://github.com/fidelhech/gulp-boilerplate.git
+```
 
 #### Install dependencies
 
@@ -33,16 +35,18 @@ npm install
 ```
 
 
-#### Development
+## Development
 
 When in development mode, run:
 
- `gulp dev`
+```
+gulp dev
+```
 
 This will start a [Browser-sync]() server and will reload the browser on all Sass and Pug file changes.
 
 
-#### Contributors
+##Contributors
 
 Fidel Hechavarria
 
