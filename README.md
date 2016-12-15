@@ -105,6 +105,7 @@ gulp dev
 
 `gulp init` creates your `builds` directory and `gulp dev` will start a [Browser-sync](https://browsersync.io/) server and will reload on all Sass and Pug file changes.
 
+*Note: only run `gulp init` the first time you start a project. This repo doesn't ship with a `builds` directory. You will need to initialize it yourself.*
 
 
 
