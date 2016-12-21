@@ -78,7 +78,6 @@ Import all partials inside `main.sass`:
 
 Remember that cascading will come in to play when importing partials. Make sure to import the least specific CSS rules at the top.
 
-
 *Note: It's important to prefix your Sass partials with an underscore `_` (`ie. _filename.sass`). This keeps Sass from generating a CSS file for the partial file.*
 
 
@@ -109,7 +108,7 @@ gulp dev
 
 
 
-
+## Production
 
 
 ##Contributors
