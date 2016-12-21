@@ -10,14 +10,14 @@ var gulp          = require('gulp'),
     pump          = require('pump'),
     plumber       = require('gulp-plumber');
 
-//Paths
-var templatesPath  = 'src/templates/**/*.pug',
-    stylesPath     = 'src/sass/**/*.sass',
-    scriptsPath    = 'src/js/modules/**/*.js';
+// Set source and destination variables
+var srcTemplatesPath  = 'src/templates/**/*.pug',
+    srcStylesPath     = 'src/sass/**/*.sass',
+    srcScriptsPath    = 'src/js/modules/**/*.js';
 
-/**
+/*******************************************************************
  * Development Tasks
-**/
+*******************************************************************/
 
 /**
  * Initialize Browser Sync and serve from dev build
@@ -34,16 +34,16 @@ gulp.task('browser-sync', function() {
  * Watch for file changes
  */
 gulp.task('watch', function(){
-  gulp.watch(templatesPath, ['pug']);
-  gulp.watch(stylesPath, ['sass']);
-  gulp.watch(scriptsPath, ['js']);
+  gulp.watch(srcTemplatesPath, ['pug']);
+  gulp.watch(srcStylesPath, ['sass']);
+  gulp.watch(srcScriptsPath, ['js']);
 });
 
 /**
  * Convert pug to html
  */
 gulp.task('pug', function(){
-    gulp.src('src/templates/**/*.pug')
+    gulp.src(srcTemplatesPath)
     .pipe(pug())
     .pipe(gulp.dest('builds/dev'))
     .pipe(browserSync.reload({stream: true}));
@@ -53,7 +53,7 @@ gulp.task('pug', function(){
  * Convert Sass to CSS
  */
 gulp.task('sass', function(){
-    gulp.src('src/sass/**/*.sass')
+    gulp.src(srcStylesPath)
     .pipe(plumber(function(error){ // Prevent pipe breaking caused by errors from gulp plugins
         console.log("Error in", error.message);
         this.emit('end');
@@ -73,7 +73,7 @@ gulp.task('sass', function(){
  */
 gulp.task('js', function(callback) {
   pump([
-    gulp.src('src/js/modules/**/*.js'),
+    gulp.src(srcScriptsPath),
     sourcemaps.init(),
     concat('main.js'),
     sourcemaps.write('maps'),
@@ -82,9 +82,16 @@ gulp.task('js', function(callback) {
   ], callback)
 });
 
+/**
+ * Init Task: First task to run after clone the repo
+ */
 gulp.task('init', ['pug', 'sass', 'js']);
 
 /**
- * Default development Task
+ * Dev Task: Only for development
  */
 gulp.task('dev', ['init', 'browser-sync', 'watch']);
+
+/*******************************************************************
+ * Production Tasks
+*******************************************************************/
